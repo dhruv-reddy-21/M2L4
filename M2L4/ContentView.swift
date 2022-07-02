@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var listarray:[Int] = [Int]()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            List(listarray, id: \.self) { em in
+                Text("\(em)")
+            }
+            Button(action: {
+                var randInt = Int.random(in: 1...10)
+                while randInt != 7 {
+                    listarray.append(randInt)
+                    randInt = Int.random(in: 1...10)
+                }
+            }, label: { Text("One") })
+            Button(action: {
+                for i in 0...listarray.count - 1 {
+                    listarray[i] += 1
+                }
+            }, label: { Text("Two") })
+            Button(action: {
+                listarray.removeAll()
+            }, label: { Text("Three") })
+        }
     }
 }
 
